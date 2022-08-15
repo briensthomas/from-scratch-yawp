@@ -3,9 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-
-
-
 describe('backend-express-template routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -60,5 +57,7 @@ describe('backend-express-template routes', () => {
       email: expect.any(String)
     });
   });
+
+
 
 });
