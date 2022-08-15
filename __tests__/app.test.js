@@ -46,4 +46,18 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('#GET /api/v1/users, protected must be admin to view', async () => {
+    const admin = {
+      email: admin,
+      password: admin
+    };
+    await request.agent(app).post('/api/v1/users').send(admin);
+    const res = await request.agent(app).get('/api/v1/users');
+
+    expect(res.status).toBe(200);
+    expect(res.body[0]).toEqual({
+      email: 'test@example.com',
+    });
+  });
+
 });
