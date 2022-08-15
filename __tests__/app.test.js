@@ -18,9 +18,9 @@ describe('backend-express-template routes', () => {
   });
 
   it('#POST /api/v1/users, creates a new user', async () => {
-
     const res = await request(app).post('/api/v1/users').send(newUser);
     const { email } = newUser;
+
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ 
       user: {
@@ -28,7 +28,21 @@ describe('backend-express-template routes', () => {
         email 
       },
       message: 'You\'ve signed in!' });
-
   });
+
+  it('#POST /api/v1/users/sessions, logs in an existing user', async () => {
+    const res = await request(app).post('/api/v1/users/sessions').send(newUser);
+    
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      user: {
+        id: expect.any(String),
+        email: 'test@example.com'
+      },
+      message: 'You\'ve signed in!' 
+    });
+  });
+
+  
 
 });
