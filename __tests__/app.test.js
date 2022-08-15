@@ -7,10 +7,10 @@ describe('backend-express-template routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
+});
 
-  afterAll(() => {
-    pool.end();
-  });
+afterAll(() => {
+  pool.end();
 });
 
 it('#POST /api/v1/users, creates a new user', async () => {
