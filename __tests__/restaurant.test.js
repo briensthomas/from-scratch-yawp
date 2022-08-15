@@ -23,4 +23,16 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('#GET restaurants/:id, one restaurant with nested reviews', async () => {
+    const res = await request(app).get('/api/v1/restaurants/1');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: 'El Burrito Azteca',
+      type: 'Mexican',
+      reviews: expect.any(Array)
+    });
+  });
+
 });
