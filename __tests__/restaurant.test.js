@@ -47,12 +47,23 @@ describe('backend-express-template routes', () => {
       expect(res.status).toBe(200);
     });
       
-    it('#POST restaurants/:restId/reviews should create a new review', async () => {
+    it('#POST route should return a status 200', async () => {
       const newReview = {
         stars: '5',
         detail: 'Word is, Kat likes this place!'
       };
 
+      const res = await request(app)
+        .post('/api/v1/restaurants/1/reviews')
+        .send(newReview);
+      expect(res.status).toBe(401);
+    });
+
+    it('#POST restaurants/:restId/reviews should create a new review', async () => {
+      const newReview = {
+        stars: '5',
+        detail: 'Word is, Kat likes this place!'
+      };
       // console.log('user', user);
       // console.log('res.status', res.status);
 
@@ -64,7 +75,6 @@ describe('backend-express-template routes', () => {
         stars: 5,
         detail: 'Word is, Kat likes this place!',
       });
-      expect(res.status).toBe(200, res.body);
     });
 
   });
