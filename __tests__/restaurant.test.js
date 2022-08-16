@@ -35,22 +35,37 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it('#POST restaurants/:restId/reviews should create a new review', async () => {
-    const newReview = {
-      content: 'Word is, Kat likes this place!'
-    };
-    const res = await request(app)
-      .post('/api/v1/restaurants/1/reviews')
-      .send(newReview);
-
-    expect(res.status).toBe(200);
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      stars: '5',
-      content: 'Word is, Kat likes this place!',
-      restaurant_id: '1',
-      user_id: expect.anything()
+  describe('backend-express-template routes', () => {
+    let agent = null;
+    beforeEach(async () => {
+      const user = {
+        email: 'test23@example.com',
+        password: '123456'
+      };
+      agent = request.agent(app);
+      const res = await agent.post('/api/v1/users').send(user);
+      expect(res.status).toBe(200);
     });
-  });
+      
+    it('#POST restaurants/:restId/reviews should create a new review', async () => {
+      const newReview = {
+        stars: '5',
+        detail: 'Word is, Kat likes this place!'
+      };
 
+      // console.log('user', user);
+      // console.log('res.status', res.status);
+
+      const res = await agent
+        .post('/api/v1/restaurants/1/reviews')
+        .send(newReview);
+
+      expect(res.body).toEqual({
+        stars: 5,
+        detail: 'Word is, Kat likes this place!',
+      });
+      expect(res.status).toBe(200, res.body);
+    });
+
+  });
 });

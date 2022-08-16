@@ -41,6 +41,11 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('#GET users should fail', async () => {
+    const res = await request(app).get('/api/v1/users');
+    expect(res.status).toBe(401);
+  });
+
   it('#GET /api/v1/users, protected must be admin to view', async () => {
     const agent = request.agent(app);
 
@@ -57,7 +62,5 @@ describe('backend-express-template routes', () => {
       email: expect.any(String)
     });
   });
-
-
 
 });
