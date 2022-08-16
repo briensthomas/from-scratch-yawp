@@ -35,7 +35,8 @@ CREATE TABLE yawp_reviews (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     restaurant_id BIGINT,
     user_id BIGINT,
-    content VARCHAR(255) NOT NULL,
+    stars INT,
+    detail VARCHAR(255) NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES yawp_restaurants(id),
     FOREIGN KEY (user_id) REFERENCES yawp_users(id)
 );
@@ -43,7 +44,8 @@ CREATE TABLE yawp_reviews (
 INSERT INTO yawp_reviews (
     restaurant_id,
     user_id,
-    content
+    stars,
+    detail
 )
 VALUES 
-(1, 1, 'Try the Burrito Azteca! Wet, with shredded beef, and ask for extra salsa verde!');
+(1, 1, 5, 'Try the Burrito Azteca! Wet, with shredded beef, and ask for extra salsa verde!');

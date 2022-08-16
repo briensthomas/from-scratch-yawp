@@ -46,6 +46,7 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: expect.any(String),
+      stars: '5',
       content: 'Word is, Kat likes this place!',
       restaurant_id: '1',
       user_id: expect.anything()
