@@ -28,7 +28,7 @@ describe('backend-express-template routes', () => {
     });
 
     const res = await agent.delete('/api/v1/reviews/1');
-    console.log(res.body);
+    // console.log(res.body);
     expect(res.status).toBe(200);
   });
 
@@ -41,7 +41,7 @@ describe('backend-express-template routes', () => {
     });
 
     const res = await agent.delete('/api/v1/reviews/1');
-    console.log(res.body);
+    // console.log(res.body);
     expect(res.status).toBe(200);
   });
 
