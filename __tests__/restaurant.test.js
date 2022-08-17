@@ -23,7 +23,7 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it.only('#GET /api/v1/restaurants?type= returns status 200', async () => {
+  it('#GET /api/v1/restaurants?type= returns status 200', async () => {
     const res = await request(app).get('/api/v1/restaurants?type=Mexican');
 
     expect(res.status).toBe(200);
@@ -32,10 +32,11 @@ describe('backend-express-template routes', () => {
   it('#GET /api/v1/restaurants?type= returns specific types of restaurants as a list', async () => {
     const res = await request(app).get('/api/v1/restaurants?type=Mexican');
 
-    expect(res.body[0]).toEqual({
+    expect(res.body).toEqual([{
+      id: expect.any(String),
       name: 'El Burrito Azteca',
       type: 'Mexican',
-    });
+    }]);
   });
 
   it('#GET restaurants/:restId, one restaurant with nested reviews', async () => {
