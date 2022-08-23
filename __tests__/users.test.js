@@ -49,12 +49,12 @@ describe('backend-express-template routes', () => {
   it('#GET /api/v1/users, protected must be admin to view', async () => {
     const agent = request.agent(app);
 
-    await agent.post('/api/v1/users/').send({
+    await agent.post('/api/v1/users').send({
       email: 'admin',
       password: '123456'
     });
     const res = await agent.get('/api/v1/users');
-
+    // console.log('res.body', res.body);
     expect(res.status).toBe(200);
     expect(res.body[0]).toEqual({
       created_at: expect.any(String),

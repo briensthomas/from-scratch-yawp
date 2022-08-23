@@ -3,6 +3,10 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+const testUser = {
+  email: 'test@example.com',
+  password: '123456'
+};
 
 describe('backend-express-template routes', () => {
   beforeEach(() => {
@@ -22,27 +26,22 @@ describe('backend-express-template routes', () => {
   it('#DELETE should return status 200 for user with the same user_id', async () => {
     const agent = request.agent(app);
 
-    await agent.post('/api/v1/users/sessions').send({
-      email: 'test@example.com',
-      password: '123456'
-    });
+    await agent.post('/api/v1/users/sessions').send(testUser);
+    const resDelete = await agent.delete('/api/v1/reviews/1');
 
-    const res = await agent.delete('/api/v1/reviews/1');
-    // console.log(res.body);
-    expect(res.status).toBe(200);
+    expect(resDelete.status).toBe(204);
   });
 
   it('#DELETE should return status 200 for admin', async () => {
     const agent = request.agent(app);
 
-    await agent.post('/api/v1/users/').send({
+    await agent.post('/api/v1/users').send({
       email: 'admin',
       password: '123456'
     });
 
     const res = await agent.delete('/api/v1/reviews/1');
-    // console.log(res.body);
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(204);
   });
 
 });
